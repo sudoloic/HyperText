@@ -6,24 +6,27 @@
 //
 import SwiftUI
 
-struct HyperText: View {
+public struct HyperText: View {
     let html: String
     
-    var body: some View {
+    public init(_ html: String) {
+        self.html = html
+    }
+    
+    public var body: some View {
         if let attributedString = NSAttributedString(html: html) {
             let atstr = AttributedString(attributedString)
             Text(atstr)
                 .font(.body)
         }
         else {
-            Text("Erreur")
+            EmptyView()
         }
     }
 }
 
 #Preview{
-    
-    HyperText(html: """
+    HyperText("""
 <p>Lorem ipsum dolor sit amet, qui eu scripta liberavisse. Ei est case fastidii apeirian, an possim regione expetenda sed.</p>
 <p>Est at alii solum. Per unum elit ad. At mel everti habemus. Munere philosophia id mea, omnes postea reprimique ne eum.</p>
 <p>Euismod inimicus sea ne, pri tota senserit ut.</p>
@@ -33,4 +36,3 @@ struct HyperText: View {
 <table><tr><td>1</td></tr></table>
 """)
 }
-
