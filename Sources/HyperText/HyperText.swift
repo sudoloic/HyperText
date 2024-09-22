@@ -6,21 +6,29 @@
 //
 import SwiftUI
 
+@MainActor
 public struct HyperText: View {
     let html: String
+    
+    @State private var htmlAttributedString: NSAttributedString? = nil
     
     public init(_ html: String) {
         self.html = html
     }
     
     public var body: some View {
-        if let attributedString = NSAttributedString(html: html) {
-            let atstr = AttributedString(attributedString)
-            Text(atstr)
-                .font(.body)
+        VStack{
+            if let attributedString = htmlAttributedString {
+                let atstr = AttributedString(attributedString)
+                Text(atstr)
+                    .font(.body)
+            }
+            else {
+                EmptyView()
+            }
         }
-        else {
-            EmptyView()
+        .task{
+            htmlAttributedString = NSAttributedString(html: html)
         }
     }
 }
@@ -34,5 +42,5 @@ public struct HyperText: View {
 <br>
 <p>hello</p>
 <table><tr><td>1</td></tr></table>
-""")
+""").textSelection(.enabled)
 }
