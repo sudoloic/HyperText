@@ -18,10 +18,8 @@ public struct HyperText: View {
     
     public var body: some View {
         VStack{
-            if let attributedString = htmlAttributedString {
-                let atstr = AttributedString(attributedString)
-                Text(atstr)
-                    .font(.body)
+            if let htmlAttributedString {
+                Text(AttributedString(htmlAttributedString))
             }
             else {
                 EmptyView()
@@ -42,5 +40,5 @@ public struct HyperText: View {
 <br>
 <p>hello</p>
 <table><tr><td>1</td></tr></table>
-""").textSelection(.enabled)
+""")
 }
