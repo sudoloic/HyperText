@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension NSAttributedString {
+public extension NSAttributedString {
     convenience init?(html: String, removeLinks: Bool = true) {
         guard let data = html.data(using: .utf8) else {
             return nil
